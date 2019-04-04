@@ -1,40 +1,24 @@
 $(function(){
-  $('#latin-form').submit(function(event){
-    event.preventDefault();
-    var sentence = $("input#sentence").val();
-
-    // function replaceNum(string){
-    //   for(var i = 0; i < string.length; i++){
-    //     newString = string.replace(/[0-9]/g, '');
-    //   }
-    //   return newString;
-    // }
-    // console.log(replaceNum(sentence));
+$('#RomanNumerals').submit(function(event){
+  event.preventDefault();
+  var number = $('input#number').val();
 
 
+  function convert(num){
 
-    function latinConvert(str){
-      var vowels = ['a','e','i','o','u'],
-      result = str.split('');
-      if(vowels.includes(str.charAt(0))){
-        return str += 'way';
+  var symbol = ['M','D','C','L','X','V','I'];
+  var values = [1000,500,100,50,10,5,1];
+  var result = '';
 
+  for(var i=0; i<values.length; i++){
+    while(num>=values[i]){
+      result+=symbol[i];
+      num-=values[i];
+    }
 
-      }else {
-        for(var i = 0; i < str.length; i++){
-          if(!vowels.includes(str[i])){
-            result.push(result.shift());
-          } else {
-            result.push('ay');
-            return result.join('');
-          };
-        };
-      };
-    };
-
-
-    console.log(latinConvert(sentence));
-
-
-  })
+    }
+    return result;
+  }
+  console.log(convert(number));
+})
 })
